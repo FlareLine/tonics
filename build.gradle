@@ -1,0 +1,33 @@
+buildscript {
+	dependencies {
+		classpath "gradle.plugin.com.modrinth.minotaur:Minotaur:1.1.0"
+	}
+}
+
+plugins {
+	id "fabric-loom" version "0.10-SNAPSHOT"
+	id "io.github.juuxel.loom-quiltflower-mini" version "1.2.1"
+}
+
+dependencies {
+	// Minecraft
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+
+	// Fabric
+	mappings "net.fabricmc:yarn:${project.fabric_yarn}"
+	modImplementation "net.fabricmc:fabric-loader:${project.fabric_loader}"
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api}"
+}
+
+archivesBaseName = project.archive_name
+version = "${project.mod_version}+${project.minecraft_version}".toString()
+
+apply from: 'modrinth.gradle'
+
+processResources {
+	inputs.property "version", version
+	filesMatching("fabric.mod.json") {
+		expand "version": project.version
+	}
+}
+

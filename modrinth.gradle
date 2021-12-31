@@ -1,0 +1,27 @@
+import com.modrinth.minotaur.TaskModrinthUpload
+
+buildscript {
+	repositories {
+		maven {
+			url "https://plugins.gradle.org/m2/"
+		}
+	}
+
+	dependencies {
+		classpath "gradle.plugin.com.modrinth.minotaur:Minotaur:1.1.0"
+	}
+}
+
+task publishModrinth(type: TaskModrinthUpload) {
+	dependsOn(build)
+	token = System.getenv().MODRINTH_TOKEN
+	projectId = project.modrinth_id
+	versionNumber = project.mod_version
+	versionName = "$project.mod_name v$version"
+	uploadFile = file("${project.buildDir}/libs/${archivesBaseName}-${project.mod_version}+${project.minecraft_version}.jar")
+	changelog = new String(new FileInputStream("${project.rootDir}/changelogs/${project.mod_version}.md").readAllBytes())
+	releaseType = project.modrinth_type
+	addGameVersion project.minecraft_version.toString()
+	addLoader project.mod_loader.toString()
+	wasUploadSuccessful()
+}

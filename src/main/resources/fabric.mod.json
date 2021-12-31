@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "tonics",
+  "version": "$version",
+  "name": "Tonics",
+  "description": "Additional potions and effects for Minecraft.",
+  "authors": [
+    "FlareLine <tonics@flareline.com>"
+  ],
+  "contact": {
+    "homepage": "https://github.com/flareline/tonics",
+    "sources": "https://github.com/flareline/tonics"
+  },
+
+  "license": "ISC",
+  "icon": "assets/tonics/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.flareline.tonics.Tonics"
+    ]
+  },
+  "mixins": [
+    "tonics.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.11.3",
+    "fabric": "*",
+    "minecraft": "1.18.x",
+    "java": ">=17",
+    "modmenu": "3.0.0"
+  }
+}
